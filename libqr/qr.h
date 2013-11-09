@@ -145,12 +145,13 @@ typedef enum {
 #define QR_MM_FUNC      0x04  /* 機能パターン領域(形式/型番情報を含む) */
 
 /*
- * 機能パターンの定数
+ * Constant function of pattern
  */
-#define QR_DIM_SEP      4  /* 分離パターンの幅 */
-#define QR_DIM_FINDER   7  /* 位置検出パターンの1辺の長さ */
-#define QR_DIM_ALIGN    5  /* 位置合わせパターンの1辺の長さ */
-#define QR_DIM_TIMING   6  /* タイミングパターンのオフセット位置 */
+#define QR_DIM_SEP      4  /* The width of the separation pattern */
+#define QR_DIM_FINDER   7  /* The length of one side of the 
+							  position detection pattern */
+#define QR_DIM_ALIGN    5  /* The length of one side of the alignment pattern */
+#define QR_DIM_TIMING   6  /* Offset position of the timing pattern */
 
 /*
  * サイズ定数
@@ -209,17 +210,17 @@ typedef struct qr_eclevel_t {
 } qr_eclevel_t;
 
 /*
- * 型番ごとの情報
+ * Information for each model number
  */
 typedef struct qr_vertable_t {
-  int          version;           /* 型番 */
-  int          dimension;         /* 1辺のモジュール数 */
-  int          totalwords;        /* 総コード語数 */
-  int          remainedbits;      /* 剰余ビット数 */
-  int          nlen[QR_EM_COUNT]; /* 文字数指示子のビット数 */
-  qr_eclevel_t ecl[QR_ECL_COUNT]; /* 誤り訂正レベルごとの情報 */
-  int          aplnum;            /* 位置合わせパターン中心座標数 */
-  int          aploc[QR_APL_MAX]; /* 位置合わせパターン中心座標 */
+  int          version;           /* model number */
+  int          dimension;         /* number of modules on one side */
+  int          totalwords;        /* total number of words code */
+  int          remainedbits;      /* remainder number of bits */
+  int          nlen[QR_EM_COUNT]; /* number of characters indicator */
+  qr_eclevel_t ecl[QR_ECL_COUNT]; /* error correction for each level */
+  int          aplnum;            /* alignment pattern center coordinates number */
+  int          aploc[QR_APL_MAX]; /* alignment pattern center coordinates */
 } qr_vertable_t;
 
 /*
@@ -228,13 +229,13 @@ typedef struct qr_vertable_t {
 typedef struct qr_coord_t { int ypos, xpos; } qr_coord_t;
 
 /*
- * パラメータ構造体
+ * Parameter structure
  */
 typedef struct qr_param_t {
-  int version;              /* 型番 */
-  int mode;                 /* 符号化モード */
-  int eclevel;              /* 誤り訂正レベル */
-  int masktype;             /* マスクパターン種別 */
+  int version;              /* model number */
+  int mode;                 /* encoding mode */
+  int eclevel;              /* error correction level */
+  int masktype;             /* mask pattern type */
 } qr_param_t;
 
 /*
@@ -275,13 +276,13 @@ typedef struct qrcode_sa_t {
 } QRStructured;
 
 /*
- * QRコード出力関数型
+ * QR code output function type
  */
 typedef qr_byte_t *(*QRConverter)(QRCode *, int, int, int *);
 typedef qr_byte_t *(*QRsConverter)(QRStructured *, int, int, int, int *);
 
 /*
- * 基本関数のプロトタイプ
+ * Prototype of the basic function
  */
 QR_API QRCode *qrInit(int version, int mode, int eclevel, int masktype, int *errcode);
 QR_API void qrDestroy(QRCode *qr);
@@ -295,7 +296,7 @@ QR_API int qrHasData(const QRCode *qr);
 QR_API QRCode *qrClone(const QRCode *qr, int *errcode);
 
 /*
- * 構造的連接操作用関数のプロトタイプ
+ * Prototype of Structured append operation function
  */
 QR_API QRStructured *qrsInit(int version, int mode, int eclevel, int masktype, int maxnum, int *errcode);
 QR_API void qrsDestroy(QRStructured *st);
@@ -309,7 +310,7 @@ QR_API int qrsHasData(const QRStructured *st);
 QR_API QRStructured *qrsClone(const QRStructured *st, int *errcode);
 
 /*
- * 出力用関数のプロトタイプ
+ * Prototype for the output function
  */
 QR_API int qrOutputSymbol(QRCode *qr, FILE *fp, int fmt, int sep, int mag);
 QR_API int qrOutputSymbol2(QRCode *qr, const char *pathname, int fmt, int sep, int mag);
@@ -324,7 +325,7 @@ QR_API qr_byte_t *qrSymbolToTIFF(QRCode *qr, int sep, int mag, int *size);
 QR_API qr_byte_t *qrSymbolToPNG(QRCode *qr, int sep, int mag, int *size);
 
 /*
- * 構造的連接出力用関数のプロトタイプ
+ * Prototype of Structured append output function
  */
 QR_API int qrsOutputSymbols(QRStructured *st, FILE *fp, int fmt, int sep, int mag, int order);
 QR_API int qrsOutputSymbols2(QRStructured *st, const char *pathname, int fmt, int sep, int mag, int order);
