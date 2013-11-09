@@ -39,50 +39,50 @@ extern "C" {
  * エラーコード
  */
 typedef enum {
-	/* 汎用エラーコード */
-	QR_ERR_NONE             = 0,
-	QR_ERR_USAGE            = 0x68,
-	QR_ERR_NOT_IMPL         = 0x69,
-	QR_ERR_SEE_ERRNO        = 0x6e,
-	QR_ERR_FOPEN            = 0x6f,
-	QR_ERR_FREAD            = 0x72,
-	QR_ERR_STATE            = 0x73,
-	QR_ERR_UNKNOWN          = 0x75,
-	QR_ERR_FWRITE           = 0x77,
-	QR_ERR_MEMORY_EXHAUSTED = 0x78,
+  /* 汎用エラーコード */
+  QR_ERR_NONE             = 0,
+  QR_ERR_USAGE            = 0x68,
+  QR_ERR_NOT_IMPL         = 0x69,
+  QR_ERR_SEE_ERRNO        = 0x6e,
+  QR_ERR_FOPEN            = 0x6f,
+  QR_ERR_FREAD            = 0x72,
+  QR_ERR_STATE            = 0x73,
+  QR_ERR_UNKNOWN          = 0x75,
+  QR_ERR_FWRITE           = 0x77,
+  QR_ERR_MEMORY_EXHAUSTED = 0x78,
 
-	/* パラメータ用エラーコード */
-	QR_ERR_INVALID_ARG     = 0x01,
-	QR_ERR_INVALID_VERSION = 0x02,
-	QR_ERR_INVALID_MODE    = 0x03,
-	QR_ERR_INVALID_ECL     = 0x04,
-	QR_ERR_INVALID_MPT     = 0x05,
-	QR_ERR_INVALID_MAG     = 0x06,
-	QR_ERR_INVALID_SEP     = 0x07,
-	QR_ERR_INVALID_SIZE    = 0x08,
-	QR_ERR_INVALID_FMT     = 0x09,
-	QR_ERR_INVALID_OUT     = 0x0a,
-	QR_ERR_INVALID_MAXNUM  = 0x0b,
-	QR_ERR_UNSUPPORTED_FMT = 0x0c,
-	QR_ERR_EMPTY_PARAM     = 0x0f,
+  /* パラメータ用エラーコード */
+  QR_ERR_INVALID_ARG     = 0x01,
+  QR_ERR_INVALID_VERSION = 0x02,
+  QR_ERR_INVALID_MODE    = 0x03,
+  QR_ERR_INVALID_ECL     = 0x04,
+  QR_ERR_INVALID_MPT     = 0x05,
+  QR_ERR_INVALID_MAG     = 0x06,
+  QR_ERR_INVALID_SEP     = 0x07,
+  QR_ERR_INVALID_SIZE    = 0x08,
+  QR_ERR_INVALID_FMT     = 0x09,
+  QR_ERR_INVALID_OUT     = 0x0a,
+  QR_ERR_INVALID_MAXNUM  = 0x0b,
+  QR_ERR_UNSUPPORTED_FMT = 0x0c,
+  QR_ERR_EMPTY_PARAM     = 0x0f,
 
-	/* 入力データ用エラーコード */
-	QR_ERR_EMPTY_SRC   = 0x10,
-	QR_ERR_LARGE_SRC   = 0x11,
-	QR_ERR_NOT_NUMERIC = 0x12,
-	QR_ERR_NOT_ALNUM   = 0x13,
-	QR_ERR_NOT_KANJI   = 0x14,
+  /* 入力データ用エラーコード */
+  QR_ERR_EMPTY_SRC   = 0x10,
+  QR_ERR_LARGE_SRC   = 0x11,
+  QR_ERR_NOT_NUMERIC = 0x12,
+  QR_ERR_NOT_ALNUM   = 0x13,
+  QR_ERR_NOT_KANJI   = 0x14,
 
-	/* 画像処理用エラーコード */
-	QR_ERR_IMAGE_TOO_LARGE  = 0x30,
-	QR_ERR_WIDTH_TOO_LARGE  = 0x31,
-	QR_ERR_HEIGHT_TOO_LARGE = 0x32,
-	QR_ERR_IMAGECREATE      = 0x33,
-	QR_ERR_IMAGEFORMAT      = 0x34,
-	QR_ERR_IMAGEFRAME       = 0x35,
+  /* 画像処理用エラーコード */
+  QR_ERR_IMAGE_TOO_LARGE  = 0x30,
+  QR_ERR_WIDTH_TOO_LARGE  = 0x31,
+  QR_ERR_HEIGHT_TOO_LARGE = 0x32,
+  QR_ERR_IMAGECREATE      = 0x33,
+  QR_ERR_IMAGEFORMAT      = 0x34,
+  QR_ERR_IMAGEFRAME       = 0x35,
 
-	/* zlib用エラーコード */
-	QR_ERR_DEFLATE = 0x40
+  /* zlib用エラーコード */
+  QR_ERR_DEFLATE = 0x40
 } qr_err_t;
 
 /*
@@ -96,11 +96,11 @@ typedef enum {
  * 符号化モード
  */
 typedef enum {
-	QR_EM_AUTO    = -1, /* 自動選択 */
-	QR_EM_NUMERIC =  0, /* 数字 */
-	QR_EM_ALNUM   =  1, /* 英数字: 0-9 A-Z SP $%*+-./: */
-	QR_EM_8BIT    =  2, /* 8ビットバイト */
-	QR_EM_KANJI   =  3  /* 漢字 */
+  QR_EM_AUTO    = -1, /* 自動選択 */
+  QR_EM_NUMERIC =  0, /* 数字 */
+  QR_EM_ALNUM   =  1, /* 英数字: 0-9 A-Z SP $%*+-./: */
+  QR_EM_8BIT    =  2, /* 8ビットバイト */
+  QR_EM_KANJI   =  3  /* 漢字 */
 } qr_em_t;
 
 /* モード総数 */
@@ -110,10 +110,10 @@ typedef enum {
  * 誤り訂正レベル
  */
 typedef enum {
-	QR_ECL_L = 0, /* レベルL */
-	QR_ECL_M = 1, /* レベルM */
-	QR_ECL_Q = 2, /* レベルQ */
-	QR_ECL_H = 3  /* レベルH */
+  QR_ECL_L = 0, /* レベルL */
+  QR_ECL_M = 1, /* レベルM */
+  QR_ECL_Q = 2, /* レベルQ */
+  QR_ECL_H = 3  /* レベルH */
 } qr_ecl_t;
 
 /* レベル総数 */
@@ -123,15 +123,15 @@ typedef enum {
  * 出力形式
  */
 typedef enum {
-	QR_FMT_PNG   =  0, /* PNG */
-	QR_FMT_BMP   =  1, /* BMP */
-	QR_FMT_TIFF  =  2, /* TIFF */
-	QR_FMT_PBM   =  3, /* PBM */
-	QR_FMT_SVG   =  4, /* SVG */
-	QR_FMT_JSON  =  5, /* JSON */
-	QR_FMT_DIGIT =  6, /* 文字列 */
-	QR_FMT_ASCII =  7, /* アスキーアート */
-	QR_FMT_UNAVAILABLE = -1 /* 利用不可 */
+  QR_FMT_PNG   =  0, /* PNG */
+  QR_FMT_BMP   =  1, /* BMP */
+  QR_FMT_TIFF  =  2, /* TIFF */
+  QR_FMT_PBM   =  3, /* PBM */
+  QR_FMT_SVG   =  4, /* SVG */
+  QR_FMT_JSON  =  5, /* JSON */
+  QR_FMT_DIGIT =  6, /* 文字列 */
+  QR_FMT_ASCII =  7, /* アスキーアート */
+  QR_FMT_UNAVAILABLE = -1 /* 利用不可 */
 } qr_format_t;
 
 /* 出力形式総数 */
@@ -149,7 +149,7 @@ typedef enum {
  */
 #define QR_DIM_SEP      4  /* The width of the separation pattern */
 #define QR_DIM_FINDER   7  /* The length of one side of the 
-							  position detection pattern */
+                              position detection pattern */
 #define QR_DIM_ALIGN    5  /* The length of one side of the alignment pattern */
 #define QR_DIM_TIMING   6  /* Offset position of the timing pattern */
 
